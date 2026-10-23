@@ -1,0 +1,66 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{tema}[2026/10/13 Tema esercitazioni Lab. Programmazione]
+\RequirePackage[T1]{fontenc}
+\RequirePackage{lmodern}
+\RequirePackage[italian]{babel}
+\RequirePackage{xcolor}
+\RequirePackage{graphicx}
+\RequirePackage{amsmath}
+
+\definecolor{accento}{HTML}{1F5FA8}
+\definecolor{grigiocodice}{gray}{0.95}
+
+\usetheme{default}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[frame number]
+\setbeamercolor{frametitle}{fg=accento,bg=white}
+\setbeamercolor{title}{fg=accento}
+\setbeamercolor{structure}{fg=accento}
+\setbeamercolor{normal text}{fg=black,bg=white}
+\setbeamerfont{frametitle}{series=\bfseries,size=\Large}
+\setbeamercolor{footline}{fg=gray}
+\setbeamertemplate{itemize items}[circle]
+\setbeamertemplate{blocks}[default]
+\setbeamercolor{block title}{fg=white,bg=accento}
+\setbeamercolor{block body}{fg=black,bg=accento!6}
+\setbeamercolor{block title example}{fg=white,bg=accento!70!black}
+\setbeamercolor{block body example}{fg=black,bg=accento!6}
+\setbeamercolor{block title alerted}{fg=white,bg=red!65!black}
+\setbeamercolor{block body alerted}{fg=black,bg=red!5}
+
+% Logo: usa common/<file>.pdf o .png se esiste, altrimenti un segnaposto.
+\newcommand{\loghetto}[2]{%
+  \IfFileExists{#1.pdf}{\includegraphics[height=1.4cm]{#1.pdf}}{%
+  \IfFileExists{#1.png}{\includegraphics[height=1.4cm]{#1.png}}{%
+  \fbox{\parbox[c][1.4cm][c]{3.8cm}{\centering\small #2}}}}}
+
+\newcommand{\titolo}[1]{%
+  \begin{frame}[plain]
+    \loghetto{logo_univaq}{Logo Universit\`a}\hfill\loghetto{logo_disim}{Logo Dipartimento}
+    \vfill
+    \begin{center}
+      {\color{accento}\fontsize{26}{30}\selectfont\bfseries #1\par}
+      \vspace{1.2em}
+      {\large Laboratorio di Programmazione \textendash{} Esercitazione\par}
+    \end{center}
+    \vfill
+  \end{frame}%
+  \contatti}
+
+% Seconda slide di ogni deck: come contattare il docente.
+\newcommand{\contatti}{%
+  \begin{frame}{Come contattarmi}
+    \begin{block}{Email}
+      \texttt{daniele.dipompeo@univaq.it}\\[0.3em]
+      Usate un \textbf{oggetto chiaro}, ad esempio \texttt{Esercitazioni - Lab Prog: <argomento>}.
+      Ricevo molte email ogni giorno: un oggetto chiaro mi permette di riconoscere subito che
+      riguarda il corso e di rispondervi pi\`u in fretta.
+    \end{block}
+    \begin{block}{Ricevimento}
+      Il ricevimento si svolge \textbf{previo appuntamento}, da concordare: inviatemi un'email oppure scrivetemi su MS Teams.
+    \end{block}
+    \begin{block}{MS Teams}
+      Lasciate un messaggio nel canale \textbf{Esercitazioni} \textbf{taggando il mio nome}.
+    \end{block}
+  \end{frame}}
+\endinput

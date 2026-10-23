@@ -1,0 +1,20 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{codice}[2026/10/13 Listing Java e tabelle di traccia]
+\RequirePackage{listings}
+\RequirePackage{xcolor}
+\lstdefinestyle{javastyle}{
+  language=Java, basicstyle=\ttfamily\footnotesize,
+  keywordstyle=\bfseries\color{accento}, commentstyle=\itshape\color{gray},
+  stringstyle=\color{green!40!black}, backgroundcolor=\color{grigiocodice},
+  numbers=left, numberstyle=\tiny\color{gray}, xleftmargin=1.5em,
+  breaklines=true, showstringspaces=false, tabsize=2, columns=fullflexible,
+  extendedchars=true, inputencoding=utf8,
+  literate={à}{{\`a}}1 {è}{{\`e}}1 {é}{{\'e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+}
+\lstset{style=javastyle}
+\newcommand{\codice}[2][]{\lstinputlisting[#1]{#2}}
+% \begin{traccia}{N} riga & v1 & ... \\ \hline ... \end{traccia}  (N = numero di variabili)
+\newenvironment{traccia}[1]
+  {\renewcommand{\arraystretch}{1.25}\begin{tabular}{|c|*{#1}{c|}}\hline}
+  {\end{tabular}}
+\endinput

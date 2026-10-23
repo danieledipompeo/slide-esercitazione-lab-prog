@@ -1,0 +1,390 @@
+\documentclass[aspectratio=169,10pt,t]{beamer}
+\usepackage{tema}
+\usepackage{codice}
+\usepackage{macros}
+\begin{document}
+
+\titolo{Introduzione e setup dell'ambiente}
+
+% ------------------------------------------------------------------ A. Introduzione
+\begin{frame}{Cos'\`e un laureato in informatica?}
+  L'informatica \`e la scienza che studia come \textbf{rappresentare, elaborare e comunicare l'informazione} in modo automatico. Chi si laurea in informatica \textbf{non \`e solo uno sviluppatore}:
+  \begin{block}{Sa risolvere problemi}
+    Li analizza, li formalizza e li trasforma in algoritmi che un calcolatore pu\`o eseguire.
+  \end{block}
+  \begin{block}{Sa progettare e capire i sistemi}
+    Sistemi operativi, reti, basi di dati, sicurezza: sa come funziona ci\`o che sta sotto le applicazioni.
+  \end{block}
+  \begin{block}{Sa lavorare con dati, modelli e ricerca}
+    Analisi dei dati, intelligenza artificiale, verifica della correttezza: servono basi solide, non solo strumenti.
+  \end{block}
+  Sviluppare software \`e una professione possibile, \textbf{non l'unica}.
+\end{frame}
+
+\begin{frame}{Perch\'e cominciamo dal codice}
+  \begin{itemize}
+    \item Programmare \`e lo \textbf{strumento di base} dell'informatico, come il laboratorio per un chimico: serve per mettere alla prova le idee
+    \item L'obiettivo non \`e memorizzare la sintassi di Java, ma imparare a \textbf{ragionare}: dal problema all'algoritmo, dall'algoritmo al programma
+    \item Si impara facendo: le esercitazioni sono interattive e scriverete il codice \textbf{voi, al PC}
+    \item Gli errori fanno parte del lavoro: un messaggio d'errore \`e un'informazione, non un giudizio
+    \item Ogni esercizio ha consegna, indizio e soluzione: provate prima di guardare
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Linguaggi compilati}
+  \begin{itemize}
+    \item Usano un software detto \textbf{compilatore}
+    \item Il compilatore controlla il file sorgente e lo trasforma in un file eseguibile dal sistema operativo
+    \item Esempi: C, C++, Pascal
+  \end{itemize}
+  \vspace{1.5em}
+  \begin{center}\small
+    \blocco{File sorgente}\freccia\blocco{Compilatore}\freccia\blocco{File eseguibile}\freccia\blocco{Sistema operativo}\freccia\blocco{Risultato}
+  \end{center}
+\end{frame}
+
+\begin{frame}{Linguaggi interpretati}
+  \begin{itemize}
+    \item Usano un software detto \textbf{interprete}
+    \item L'interprete controlla il file sorgente e lo esegue direttamente, senza produrre un file eseguibile
+    \item Esempi: Python, JavaScript, PHP
+  \end{itemize}
+  \vspace{1.5em}
+  \begin{center}
+    \blocco{File sorgente}\freccia\blocco{Interprete}\freccia\blocco{Risultato}
+  \end{center}
+\end{frame}
+
+\begin{frame}{Java \`e un linguaggio ``ibrido''}
+  \begin{itemize}
+    \item Un file \texttt{.java} viene trasformato dal compilatore in un file \texttt{.class} (\emph{bytecode})
+    \item Il file \texttt{.class} viene eseguito dalla \textbf{Java Virtual Machine} (JVM)
+    \item Il programma \`e indipendente dal sistema operativo: gira su ogni macchina che abbia una JVM
+  \end{itemize}
+  \vspace{1.5em}
+  \begin{center}\small
+    \blocco{File \texttt{.java}}\freccia\blocco{Compilatore \texttt{javac}}\freccia\blocco{File \texttt{.class}}\freccia\blocco{JVM \texttt{java}}\freccia\blocco{Risultato}
+  \end{center}
+\end{frame}
+
+\begin{frame}{Cosa serve per programmare in Java}
+  Servono due cose:
+  \begin{enumerate}
+    \item Il \textbf{JDK} (\emph{Java Development Kit}): contiene il compilatore e la JVM
+    \item Un \textbf{ambiente di sviluppo} (IDE) per scrivere, eseguire e correggere il codice
+  \end{enumerate}
+  \vspace{0.8em}
+  \begin{block}{In questo corso}
+    \begin{itemize}
+      \item \textbf{OpenJDK} versione \textbf{25} (LTS)
+      \item IDE: \textbf{Visual Studio Code} con le estensioni per Java
+      \item Chi preferisce pu\`o usare IntelliJ IDEA o Eclipse: nelle prossime slide ci sono le istruzioni per tutti e tre
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+% ------------------------------------------------------------------ B. JDK
+\begin{frame}{Installare OpenJDK 25}
+  \begin{itemize}
+    \item \textbf{OpenJDK} \`e l'implementazione di riferimento di Java: libera e gratuita
+    \item Le versioni pronte da scaricare per Windows, macOS e Linux sono su \texttt{https://jdk.java.net/25}
+    \item Si scarica un archivio (\texttt{.zip} o \texttt{.tar.gz}) da decomprimere: non c'\`e un installer
+    \item Su Linux e macOS si pu\`o usare anche un gestore di pacchetti (\texttt{apt}, Homebrew) o SDKMAN
+  \end{itemize}
+  \vspace{0.5em}
+  \begin{errore}
+    Scaricate la versione \textbf{JDK} (non solo JRE), numero \textbf{25}, adatta al vostro sistema e processore (x64 o AArch64).
+  \end{errore}
+\end{frame}
+
+\begin{frame}{JDK su Windows}
+  \begin{enumerate}
+    \item Da \texttt{jdk.java.net/25} scaricare l'archivio \texttt{.zip} per Windows
+    \item Estrarlo in una cartella stabile, ad esempio \texttt{C:\textbackslash Java}: si otterr\`a una cartella \texttt{jdk-25...}
+    \item Aggiungere Java alle variabili d'ambiente (\texttt{JAVA\_HOME} e \texttt{Path}): vedere le slide sul \texttt{PATH}
+    \item \textbf{Aprire un nuovo terminale} (PowerShell) e verificare l'installazione
+  \end{enumerate}
+  \vspace{0.5em}
+  Alternativa con installer: \texttt{winget install Microsoft.OpenJDK.25} (\emph{Microsoft Build of OpenJDK}, basata su OpenJDK; imposta da sola il \texttt{Path}).
+\end{frame}
+
+\begin{frame}[fragile]{JDK su macOS}
+  \textbf{Opzione 1: archivio.} Da \texttt{jdk.java.net/25} scaricare il \texttt{.tar.gz} per macOS (AArch64 per i Mac con chip Apple, x64 per quelli Intel) e decomprimerlo nella cartella dei JDK:
+\begin{lstlisting}[language={},numbers=none]
+sudo tar -xzf <file scaricato>.tar.gz -C /Library/Java/JavaVirtualMachines
+\end{lstlisting}
+  \textbf{Opzione 2: Homebrew} (se gi\`a installato):
+\begin{lstlisting}[language={},numbers=none]
+brew install openjdk@25
+sudo ln -sfn "$(brew --prefix)/opt/openjdk@25/libexec/openjdk.jdk" \
+  /Library/Java/JavaVirtualMachines/openjdk-25.jdk
+\end{lstlisting}
+  Poi aprire un nuovo Terminale e verificare l'installazione.
+\end{frame}
+
+\begin{frame}[fragile]{JDK su Linux}
+  \textbf{Ubuntu e derivate} (24.04 o pi\`u recenti), pacchetto OpenJDK:
+\begin{lstlisting}[language={},numbers=none]
+sudo apt update
+sudo apt install openjdk-25-jdk
+\end{lstlisting}
+  Se \texttt{apt} non trova il pacchetto, abilitare il componente \texttt{universe}:
+\begin{lstlisting}[language={},numbers=none]
+sudo add-apt-repository universe
+sudo apt update
+\end{lstlisting}
+  Altre distribuzioni: usare SDKMAN (slide successiva) oppure l'archivio \texttt{.tar.gz} di \texttt{jdk.java.net/25}.
+\end{frame}
+
+\begin{frame}[fragile]{Alternativa su macOS e Linux: SDKMAN}
+  \begin{itemize}
+    \item Software a riga di comando per installare e gestire pi\`u versioni del JDK
+    \item Utile quando progetti diversi richiedono JDK diversi
+  \end{itemize}
+\begin{lstlisting}[language={},numbers=none]
+curl -s "https://get.sdkman.io" | bash
+source "$HOME/.sdkman/bin/sdkman-init.sh"
+sdk list java          # cercare un identificatore 25.x-open
+sdk install java <identificatore>
+\end{lstlisting}
+  Sito: \texttt{https://sdkman.io}
+\end{frame}
+
+\begin{frame}[fragile]{Verificare l'installazione}
+  Da un \textbf{nuovo} terminale:
+\begin{lstlisting}[language={},numbers=none]
+java --version
+javac --version
+\end{lstlisting}
+  \begin{itemize}
+    \item Entrambi i comandi devono rispondere con la versione \textbf{25}
+    \item \texttt{java} \`e la JVM, \texttt{javac} \`e il compilatore: servono tutti e due
+  \end{itemize}
+  \vspace{0.3em}
+  \begin{errore}
+    Se compare \emph{``command not found''} o \emph{``non riconosciuto''}, Java non \`e nel \texttt{PATH}: vedere le slide successive.
+  \end{errore}
+\end{frame}
+
+\begin{frame}[fragile]{Java e variabili d'ambiente: Windows}
+  \begin{enumerate}
+    \item Dalla barra di ricerca cercare ``variabili d'ambiente'' e aprire \emph{Modifica le variabili d'ambiente relative al sistema}, poi \emph{Variabili d'ambiente}
+    \item Sotto \emph{Variabili di sistema} cliccare \emph{Nuova}: nome \texttt{JAVA\_HOME}, valore la cartella del JDK, ad esempio:
+  \end{enumerate}
+\begin{lstlisting}[language={},numbers=none]
+C:\Java\jdk-25
+\end{lstlisting}
+  \begin{enumerate}\setcounter{enumi}{2}
+    \item Selezionare \texttt{Path} $\rightarrow$ \emph{Modifica} $\rightarrow$ \emph{Nuovo} e aggiungere:
+  \end{enumerate}
+\begin{lstlisting}[language={},numbers=none]
+%JAVA_HOME%\bin
+\end{lstlisting}
+  \begin{enumerate}\setcounter{enumi}{3}
+    \item Confermare con \emph{OK} e aprire un nuovo terminale
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Java e variabili d'ambiente: macOS e Linux}
+  Controllare dove si trova Java:
+\begin{lstlisting}[language={},numbers=none]
+which java
+echo $JAVA_HOME
+\end{lstlisting}
+  Se serve, aggiungere queste righe a \texttt{\textasciitilde/.zshrc} (macOS) o \texttt{\textasciitilde/.bashrc} (Linux):
+\begin{lstlisting}[language={},numbers=none]
+export JAVA_HOME=<cartella del JDK>
+export PATH="$JAVA_HOME/bin:$PATH"
+\end{lstlisting}
+  Su macOS la cartella si trova con \texttt{/usr/libexec/java\_home -v 25}. Poi aprire un nuovo terminale.
+\end{frame}
+
+% ------------------------------------------------------------------ C. IDE
+\begin{frame}{Ambienti di sviluppo (IDE)}
+  Un IDE (\emph{Integrated Development Environment}) \`e un software con funzioni che facilitano la programmazione:
+  \begin{itemize}
+    \item evidenzia la sintassi (tipi, parole chiave, strutture di controllo)
+    \item segnala gli errori di compilazione mentre si scrive
+    \item completa il codice
+    \item esegue il programma e offre il debugger
+  \end{itemize}
+  \vspace{0.5em}
+  Esistono molti IDE per Java. Vediamo come configurare tre di quelli pi\`u usati:
+  \textbf{Visual Studio Code}, \textbf{Eclipse}, \textbf{IntelliJ IDEA}.
+\end{frame}
+
+\begin{frame}{Un avviso sugli assistenti AI}
+  \begin{alertblock}{Disattivateli}
+    Gli IDE moderni includono assistenti AI che completano o scrivono il codice al posto vostro.
+    Per imparare a programmare vanno \textbf{disattivati}: si impara scrivendo il codice e correggendo gli errori.
+  \end{alertblock}
+  \vspace{0.5em}
+  Per ogni IDE, nelle slide seguenti c'\`e il passo per disattivarli.
+\end{frame}
+
+% ---- VS Code
+\begin{frame}{Visual Studio Code: installazione}
+  \begin{enumerate}
+    \item Scaricare e installare VS Code da \texttt{code.visualstudio.com}
+    \item Aprire VS Code, andare nella vista \emph{Extensions} (icona a quadratini a sinistra)
+    \item Cercare \textbf{Extension Pack for Java} (Microsoft) e cliccare \emph{Install}
+    \item Il pacchetto installa il supporto al linguaggio, il debugger, il test runner e la gestione dei progetti
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Visual Studio Code: JDK e assistenti AI}
+  \textbf{JDK.} L'estensione di solito trova da sola il JDK installato. Se non lo trova:
+  \begin{itemize}
+    \item aprire la Command Palette (\texttt{Ctrl+Shift+P}, su macOS \texttt{Cmd+Shift+P})
+    \item eseguire \emph{Java: Configure Java Runtime} e verificare che compaia il JDK 25
+  \end{itemize}
+  \vspace{0.5em}
+  \textbf{Disattivare l'AI.}
+  \begin{itemize}
+    \item Aprire le impostazioni (\texttt{Ctrl+,}), cercare \texttt{chat.disableAIFeatures} e abilitarla
+    \item Nella vista \emph{Extensions}, disattivare o disinstallare eventuali estensioni di AI (ad esempio GitHub Copilot, IntelliCode)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Visual Studio Code: creare un progetto}
+  \begin{enumerate}
+    \item Aprire la Command Palette (\texttt{Ctrl+Shift+P})
+    \item Eseguire \emph{Java: Create Java Project\ldots}
+    \item Scegliere \emph{No build tools}
+    \item Scegliere la cartella in cui salvare il progetto e dargli un nome (es. \texttt{primoProgetto})
+    \item Il progetto contiene la cartella \texttt{src} con i file \texttt{.java}
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Visual Studio Code: package, classe ed esecuzione}
+  \begin{enumerate}
+    \item Nella vista \emph{Explorer}, tasto destro su \texttt{src}, creare la cartella (package) \texttt{it/univaq/disim/main}
+    \item Dentro, creare il file \texttt{Main.java} e scrivere il programma (slide ``Primo codice Java'')
+    \item Eseguire con il pulsante \emph{Run} sopra il metodo \texttt{main}, oppure con il triangolo in alto a destra
+    \item Il risultato appare nel pannello in basso (\emph{Terminal} o \emph{Debug Console})
+  \end{enumerate}
+\end{frame}
+
+% ---- Eclipse
+\begin{frame}{Eclipse: installazione}
+  \begin{enumerate}
+    \item Scaricare l'\emph{Eclipse Installer} da \texttt{eclipse.org/downloads}
+    \item Dall'installer scegliere \textbf{Eclipse IDE for Java Developers}
+    \item Se richiesto, indicare la cartella del JDK 25 appena installato (di solito \`e gi\`a rilevata)
+    \item Cliccare \emph{Install} e al termine avviare Eclipse
+  \end{enumerate}
+  \vspace{0.5em}
+  Eclipse non va configurato per l'AI: basta \textbf{non installare plugin di assistenti AI}.
+\end{frame}
+
+\begin{frame}{Eclipse: il workspace e il progetto}
+  \begin{itemize}
+    \item Al primo avvio bisogna scegliere un \textbf{workspace}: una cartella che raccoglie pi\`u progetti Java
+    \item Il workspace \`e un concetto di Eclipse, non di Java: i progetti dello stesso workspace condividono le configurazioni di Eclipse
+  \end{itemize}
+  \vspace{0.5em}
+  Per creare un progetto: \emph{File $\rightarrow$ New $\rightarrow$ Java Project}
+  \begin{itemize}
+    \item inserire il nome del progetto
+    \item lasciare spuntato \emph{Use default JRE\ldots{} and workspace compiler preferences}
+    \item \textbf{togliere} la spunta a \emph{Create module-info.java file}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Eclipse: package, classe ed esecuzione}
+  \begin{enumerate}
+    \item Tasto destro su \texttt{src} $\rightarrow$ \emph{New $\rightarrow$ Package}, nome \texttt{it.univaq.disim.main}
+    \item Tasto destro sul package $\rightarrow$ \emph{New $\rightarrow$ Class}, nome \texttt{Main}
+    \item Scrivere il programma nel file \texttt{Main.java}
+    \item Cliccare sul pulsante \emph{Run} nella barra in alto
+    \item Il risultato appare nella \emph{Console} in basso
+  \end{enumerate}
+\end{frame}
+
+% ---- IntelliJ
+\begin{frame}{IntelliJ IDEA: installazione}
+  \begin{enumerate}
+    \item Scaricare IntelliJ IDEA da \texttt{jetbrains.com/idea/download}
+    \item Installare e avviare
+    \item Al primo avvio compare una prova di 30 giorni delle funzioni avanzate: terminata la prova si pu\`o continuare con la versione \textbf{gratuita}, che basta per tutto il corso
+  \end{enumerate}
+  \vspace{0.5em}
+  \begin{alertblock}{Nota}
+    Dalla versione 2025.3 non esiste pi\`u una ``Community Edition'' separata: c'\`e un solo IntelliJ IDEA con un livello gratuito.
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{IntelliJ IDEA: JDK e assistente AI}
+  \textbf{JDK.} Nella creazione del progetto si sceglie il JDK 25: se non \`e elencato, l'IDE permette di indicare la cartella del JDK installato oppure di scaricarlo.
+  \vspace{0.8em}
+
+  \textbf{Disattivare l'AI.}
+  \begin{itemize}
+    \item cliccare sul widget AI nella barra del titolo e scegliere \emph{Disable Permanently via Plugin}, poi confermare
+    \item in alternativa, per un singolo progetto, creare nella cartella principale un file vuoto di nome \texttt{.noai}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{IntelliJ IDEA: creare progetto, classe ed esecuzione}
+  \begin{enumerate}
+    \item \emph{New Project}: scegliere \emph{Java}, dare un nome al progetto, scegliere il JDK 25
+    \item Disattivare l'opzione che genera il codice di esempio (\emph{Add sample code})
+    \item Tasto destro su \texttt{src} $\rightarrow$ \emph{New $\rightarrow$ Package}, nome \texttt{it.univaq.disim.main}
+    \item Tasto destro sul package $\rightarrow$ \emph{New $\rightarrow$ Java Class}, nome \texttt{Main}
+    \item Eseguire con il triangolo verde accanto al metodo \texttt{main}
+    \item Il risultato appare nella finestra \emph{Run} in basso
+  \end{enumerate}
+\end{frame}
+
+% ------------------------------------------------------------------ D. Primo progetto
+\begin{frame}{Struttura di un progetto Java}
+  \begin{itemize}
+    \item \textbf{src}: cartella principale con i file \texttt{.java}, divisi in package
+    \item \textbf{package}: raccoglie pi\`u file \texttt{.java} secondo una certa logica
+    \item \textbf{file .java}: ogni file contiene una classe Java
+  \end{itemize}
+  \vspace{0.5em}
+  Per dare i nomi a progetti, package e classi si usano delle \textbf{convenzioni}: non sono obbligatorie, ma le usano tutti i programmatori.
+\end{frame}
+
+\begin{frame}{Convenzioni sintattiche}
+  \begin{itemize}
+    \item \textbf{Progetti}: iniziano con la minuscola, le altre parole con la maiuscola (\emph{camel case}), es. \texttt{primoProgetto}
+    \item \textbf{Package}: tutto minuscolo, parole separate da un punto; di solito si parte dal dominio al contrario, es. \texttt{it.univaq.disim.main}
+    \item \textbf{Classi}: iniziano con la maiuscola, poi camel case, es. \texttt{Main}, \texttt{SommaInteri}, \texttt{AnagraficaUniversita}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Primo codice Java}
+  \codice{codice/Main.java}
+  \vspace{0.5em}
+  Il file \texttt{Main.java} sta nel package \texttt{it.univaq.disim.main}. Eseguitelo: nella console deve comparire \texttt{Ciao!}.
+\end{frame}
+
+\begin{frame}{Esercizi}
+  \begin{esercizio}[Verifica l'installazione]
+    Da un terminale esegui \texttt{java --version} e \texttt{javac --version}. Che versione vedi?
+  \end{esercizio}
+  \indizio{Servono entrambi i comandi. Se non funzionano, rivedi la slide sul \texttt{PATH} del tuo sistema operativo.}
+  \soluzione{Entrambi devono indicare la versione 25.}
+\end{frame}
+
+\begin{frame}{Esercizi}
+  \begin{esercizio}[Il tuo primo programma]
+    Nel tuo IDE crea un progetto con il package \texttt{it.univaq.disim.main} e la classe \texttt{Main}. Fai stampare il tuo nome.
+  \end{esercizio}
+  \indizio{Cambia il testo tra virgolette dentro \texttt{System.out.println}.}
+  \soluzione{\texttt{System.out.println("Mario");} dentro il metodo \texttt{main}.}
+\end{frame}
+
+\begin{frame}[plain]
+  \vfill
+  \begin{center}
+    {\color{accento}\fontsize{26}{30}\selectfont\bfseries Congratulazioni!\par}
+    \vspace{1em}
+    {\large Hai scritto il tuo primo programma in Java\par}
+  \end{center}
+  \vfill
+\end{frame}
+
+\end{document}

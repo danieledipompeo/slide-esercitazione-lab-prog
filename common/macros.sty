@@ -1,0 +1,27 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{macros}[2026/10/13 Macro per esercizi]
+\newcounter{numesercizio}
+% Numerazione stabile: il contatore avanza solo alla prima overlay e il numero di ogni
+% esercizio della slide viene ricordato per le overlay successive (anche con 2+ esercizi per slide).
+\makeatletter
+\newcount\es@k \def\es@key{}
+\newenvironment{esercizio}[1][]{%
+  \edef\es@now{\the\c@framenumber.\the\beamer@slideinframe}%
+  \ifx\es@now\es@key\else\global\es@k=0 \xdef\es@key{\es@now}\fi
+  \global\advance\es@k by 1
+  \ifnum\beamer@slideinframe=1 \stepcounter{numesercizio}%
+    \expandafter\xdef\csname es@n\the\es@k\endcsname{\thenumesercizio}\fi
+  \begin{block}{Esercizio \csname es@n\the\es@k\endcsname\ifx&#1&\else\ \textendash\ #1\fi}}
+  {\end{block}}
+\makeatother
+\newcommand{\indizio}[2][2]{\only<#1->{\begin{exampleblock}{Indizio}#2\end{exampleblock}}}
+\ifdefined\SENZASOL
+  \newcommand{\soluzione}[2][3]{}
+\else
+  \newcommand{\soluzione}[2][3]{\only<#1->{\begin{exampleblock}{Soluzione}#2\end{exampleblock}}}
+\fi
+\newenvironment{errore}{\begin{alertblock}{Errore tipico}}{\end{alertblock}}
+% Diagramma a catena: \blocco{A}\freccia\blocco{B}
+\newcommand{\blocco}[1]{\fcolorbox{accento}{accento!6}{\strut\ #1\ }}
+\newcommand{\freccia}{\ $\to$\ }
+\endinput

@@ -1,0 +1,161 @@
+\documentclass[aspectratio=169,10pt,t]{beamer}
+\usepackage{tema}
+\usepackage{codice}
+\usepackage{macros}
+\begin{document}
+
+\titolo{Ambiente e primo programma}
+
+\begin{frame}{Obiettivi di oggi}
+  \begin{itemize}
+    \item Capire cosa succede dal file sorgente all'esecuzione
+    \item Compilare ed eseguire un programma Java da terminale
+    \item Riconoscere errori di compilazione ed errori di esecuzione
+    \item Eseguire un programma da Visual Studio Code
+    \item Vedere (solo un accenno) cos'è il debugger
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Dal sorgente all'esecuzione}
+  \begin{center}
+    \texttt{Ciao.java} $\xrightarrow{\ \texttt{javac}\ }$ \texttt{Ciao.class} $\xrightarrow{\ \texttt{java}\ }$ risultato
+  \end{center}
+  \vspace{1em}
+  \begin{itemize}
+    \item \texttt{.java}: il testo che scriviamo (codice sorgente)
+    \item \texttt{javac}: il compilatore, controlla e traduce in bytecode
+    \item \texttt{.class}: il bytecode, eseguito dalla JVM con il comando \texttt{java}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Il primo programma}
+  \codice{codice/Ciao.java}
+  \vspace{0.5em}
+  Il file si chiama \texttt{Ciao.java}: il nome del file coincide con quello della classe.
+\end{frame}
+
+\begin{frame}[fragile]{Compilare ed eseguire da terminale}
+\begin{lstlisting}[language={},numbers=none]
+$ javac Ciao.java
+$ java Ciao
+Ciao!
+\end{lstlisting}
+  \begin{itemize}
+    \item \texttt{javac Ciao.java}: serve il nome del \textbf{file}, con \texttt{.java}
+    \item \texttt{java Ciao}: serve il nome della \textbf{classe}, senza estensione
+    \item Dopo la compilazione compare \texttt{Ciao.class} nella cartella
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Errore di compilazione}
+  \codice{codice/ErroreCompilazione.java}
+\begin{lstlisting}[language={},numbers=none]
+ErroreCompilazione.java:3: error: ';' expected
+    System.out.println("Ciao!")
+                               ^
+1 error
+\end{lstlisting}
+  Il compilatore indica la \textbf{riga} e il \textbf{tipo} di problema. Il programma non parte.
+\end{frame}
+
+\begin{frame}[fragile]{Errore di esecuzione}
+  \codice{codice/ErroreEsecuzione.java}
+\begin{lstlisting}[language={},numbers=none]
+Exception in thread "main" java.lang.ArithmeticException: / by zero
+	at ErroreEsecuzione.main(ErroreEsecuzione.java:5)
+\end{lstlisting}
+  Il programma compila, parte, e si ferma durante l'esecuzione.
+\end{frame}
+
+\begin{frame}{Due tipi di errore}
+  \begin{center}
+  \begin{tabular}{|l|l|l|}
+    \hline
+     & \textbf{Compilazione} & \textbf{Esecuzione} \\ \hline
+    Quando & prima di partire (\texttt{javac}) & mentre gira (\texttt{java}) \\ \hline
+    Il programma parte? & no & s\`i, poi si ferma \\ \hline
+    Esempio & \texttt{;} mancante & divisione per zero \\ \hline
+  \end{tabular}
+  \end{center}
+\end{frame}
+
+\begin{frame}{Un accenno al debugger}
+  Il debugger di VS Code esegue il programma \textbf{una riga alla volta} e mostra i valori delle variabili.
+  \begin{itemize}
+    \item \textbf{Breakpoint}: clic a sinistra del numero di riga (\texttt{F9}); il programma si ferma l\`i
+    \item \textbf{Avvio}: pulsante \emph{Debug} sopra il \texttt{main}; \textbf{Step over} (\texttt{F10}): va avanti di una riga
+    \item \textbf{Variables}: nel pannello \emph{Run and Debug}, i valori correnti delle variabili
+  \end{itemize}
+  \vspace{0.5em}
+  Il programma \texttt{int x = 4; int y = 5; y = x + y;} visto passo passo:
+  \begin{center}
+  \begin{traccia}{2}
+    dopo la riga & x & y \\ \hline
+    1 & 4 & -- \\ \hline
+    2 & 4 & 5 \\ \hline
+    3 & 4 & 9 \\ \hline
+  \end{traccia}
+  \end{center}
+  Dall'incontro 2 lo useremo davvero.
+\end{frame}
+
+\begin{frame}{Esercizi}
+  \begin{esercizio}[Il tuo nome]
+    Modifica \texttt{Ciao} perch\'e stampi il tuo nome al posto di \texttt{Ciao!}.
+  \end{esercizio}
+  \indizio{Cambia solo il testo tra virgolette.}
+  \soluzione{\texttt{System.out.println("Mario");}}
+\end{frame}
+
+\begin{frame}[fragile]{Esercizi}
+  \begin{esercizio}[Cosa stampa?]
+    Prima di eseguire, scrivi cosa stampa \texttt{Righe}.
+  \end{esercizio}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \codice[numbers=none]{codice/Righe.java}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \indizio{\texttt{print} non va a capo, \texttt{println} s\`i.}
+      \soluzione{\texttt{AB}, poi \texttt{CD}, poi \texttt{E}, ciascuna su una riga: la riga vuota \texttt{println()} chiude solo \texttt{CD}.}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Esercizi}
+  \begin{esercizio}[Correggi l'errore]
+    Copia \texttt{ErroreCompilazione.java}, compilalo e correggilo leggendo il messaggio.
+  \end{esercizio}
+  \indizio{Il messaggio dice \texttt{';' expected} alla riga 3.}
+  \soluzione{Aggiungere il \texttt{;} alla fine di \texttt{System.out.println("Ciao!")}.}
+\end{frame}
+
+\begin{frame}{Esercizi}
+  \begin{esercizio}[Errore di esecuzione]
+    Esegui \texttt{ErroreEsecuzione}. In che riga si ferma? Perch\'e?
+  \end{esercizio}
+  \indizio{Guarda la riga indicata nel messaggio e i valori di \texttt{a} e \texttt{b}.}
+  \soluzione{Riga 5: la divisione \texttt{a / b} con \texttt{b} uguale a 0 non \`e definita.}
+\end{frame}
+
+\begin{frame}[fragile]{Esercizio finale}
+  \begin{esercizio}[Biglietto da visita]
+    Scrivi un programma che stampi un biglietto da visita di 5 righe con una cornice di asterischi.
+  \end{esercizio}
+  \indizio{Una riga con \texttt{println} per ogni riga stampata.}
+  \soluzione{\codice[numbers=none]{codice/Biglietto.java}}
+\end{frame}
+
+\begin{frame}{Errori frequenti}
+  \begin{errore}
+    \begin{itemize}
+      \item Il nome del file non coincide con il nome della classe
+      \item Maiuscole e minuscole: \texttt{System} non \`e \texttt{system}
+      \item Virgolette o parentesi non chiuse
+      \item \texttt{;} dimenticato a fine istruzione
+      \item Eseguire con \texttt{java Ciao.java} o compilare con \texttt{javac Ciao}
+    \end{itemize}
+  \end{errore}
+\end{frame}
+
+\end{document}

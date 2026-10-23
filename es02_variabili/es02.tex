@@ -1,0 +1,129 @@
+\documentclass[aspectratio=169,10pt,t]{beamer}
+\usepackage{tema}
+\usepackage{codice}
+\usepackage{macros}
+\begin{document}
+
+\titolo{Variabili e tabella di traccia}
+
+\begin{frame}{Dal parziale: tracciare un programma}
+  Gli esercizi del primo parziale chiedono: \emph{qual \`e il valore finale delle variabili?}
+  \begin{itemize}
+    \item Si risponde con una \textbf{tabella di traccia}: una riga per ogni passo, una colonna per ogni variabile
+    \item Partiamo da una \textbf{versione semplificata} (un solo carattere o una sola stringa)
+    \item Poi vediamo il testo \textbf{completo}, con due cicli
+  \end{itemize}
+\end{frame}
+
+%%% ---------- Esercizio 1 semplificato ----------
+\begin{frame}[fragile]{Esercizio 1}
+  \begin{columns}[T]
+    \begin{column}{0.52\textwidth}
+      \only<1>{\codice[basicstyle=\ttfamily\footnotesize,firstline=3,lastline=16,gobble=4,numbers=none,literate={length()}{{length}}{6}]{codice/Parziale1Semplice.java}}%
+      \only<2>{\codice[basicstyle=\ttfamily\footnotesize,firstline=3,lastline=16,gobble=4,numbers=none,literate={length()}{{\bfseries\color{red}length}}{6}]{codice/Parziale1Semplice.java}}%
+      \only<3->{\codice[basicstyle=\ttfamily\footnotesize,firstline=3,lastline=16,gobble=4,numbers=none]{codice/Parziale1Semplice.java}}
+      \vspace{-0.3em}
+      \only<2>{\begin{alertblock}{Attenzione}
+        \footnotesize
+        \texttt{length()} \`e un \textbf{metodo} della classe \texttt{String}: servono le parentesi.
+        La lunghezza di un \textbf{array} \`e invece un \textbf{attributo}: \texttt{a.length}, senza parentesi.
+      \end{alertblock}}
+    \end{column}
+    \begin{column}{0.44\textwidth}
+      Determinare il valore finale di \texttt{j}, \texttt{k} e \texttt{b}.
+      \indizio[4]{Una riga della tabella per ogni ripetizione del \texttt{while}.}
+      \soluzione[5]{%
+        \renewcommand{\arraystretch}{1.1}\footnotesize
+        \begin{traccia}{4}
+           & \uncover<5->{\texttt{s.charAt(j)}} & \uncover<5->{j} & \uncover<5->{k} & \uncover<5->{b} \\ \hline
+          \uncover<6->{inizio} & \uncover<6->{--} & \uncover<6->{0} & \uncover<6->{0} & \uncover<6->{false} \\ \hline
+          \uncover<7->{1} & \uncover<7->{w} & \uncover<7->{1} & \uncover<7->{1} & \uncover<7->{false} \\ \hline
+          \uncover<8->{2} & \uncover<8->{y} & \uncover<8->{2} & \uncover<8->{2} & \uncover<8->{false} \\ \hline
+          \uncover<9->{3} & \uncover<9->{y} & \uncover<9->{3} & \uncover<9->{3} & \uncover<9->{false} \\ \hline
+          \uncover<10->{4} & \uncover<10->{g} & \uncover<10->{4} & \uncover<10->{4} & \uncover<10->{true} \\ \hline
+        \end{traccia}\\[0.3em]
+        \uncover<11->{\texttt{k > v} diventa vera alla quarta ripetizione: il ciclo si ferma con \texttt{j=4}, \texttt{k=4}, \texttt{b=true}.}}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Esercizio 1: ancora tu}
+  \begin{esercizio}[Cambia il carattere]
+    Stesso programma con \texttt{c = 'w'}, \texttt{s = "kzhhh"} e \texttt{v = 2}.
+  \end{esercizio}
+  \indizio{Il ciclo si ferma anche quando \texttt{j} raggiunge \texttt{s.length()}.}
+  \soluzione{Nessuna lettera di \texttt{s} \`e \texttt{'w'}: \texttt{k} cresce a ogni passo. Alla terza ripetizione \texttt{k = 3 > 2}, quindi \texttt{j=3}, \texttt{k=3}, \texttt{b=true}.}
+\end{frame}
+
+%%% ---------- Esercizio 2 semplificato ----------
+\begin{frame}[fragile]{Esercizio 2}
+  \begin{columns}[T]
+    \begin{column}{0.52\textwidth}
+      \only<1>{\codice[basicstyle=\ttfamily\footnotesize,firstline=3,lastline=17,gobble=4,numbers=none,literate={"x"}{{'x'}}{3}]{codice/Parziale2Semplice.java}}%
+      \only<2>{\codice[basicstyle=\ttfamily\footnotesize,firstline=3,lastline=17,gobble=4,numbers=none,literate={"x"}{{\bfseries\color{red}'x'}}{3}]{codice/Parziale2Semplice.java}}%
+      \only<3->{\codice[basicstyle=\ttfamily\footnotesize,firstline=3,lastline=17,gobble=4,numbers=none]{codice/Parziale2Semplice.java}}
+      \vspace{-1.2em}
+      \only<2>{\begin{alertblock}{Attenzione}
+        \footnotesize
+        In Java gli apici singoli sono per un solo carattere (\texttt{char}): \texttt{'x'}.
+        Una \texttt{String} vuole i doppi apici: \texttt{"x"}.
+      \end{alertblock}}
+    \end{column}
+    \begin{column}{0.44\textwidth}
+      Determinare il valore finale di \texttt{j}, \texttt{k}, \texttt{p} ed \texttt{s}.
+      \indizio[4]{Confronta ogni carattere con il successivo: \texttt{t.charAt(j)} e \texttt{t.charAt(j+1)}.}
+      \soluzione[5]{%
+        \renewcommand{\arraystretch}{1.05}\footnotesize
+        \begin{traccia}{4}
+           & \uncover<5->{uguali?} & \uncover<5->{j} & \uncover<5->{k} & \uncover<5->{p} \\ \hline
+          \uncover<6->{inizio} & \uncover<6->{--} & \uncover<6->{0} & \uncover<6->{0} & \uncover<6->{true} \\ \hline
+          \uncover<7->{1} & \uncover<7->{d, d: s\`i} & \uncover<7->{1} & \uncover<7->{1} & \uncover<7->{true} \\ \hline
+          \uncover<8->{2} & \uncover<8->{d, y: no} & \uncover<8->{2} & \uncover<8->{1} & \uncover<8->{true} \\ \hline
+          \uncover<9->{3} & \uncover<9->{y, y: s\`i} & \uncover<9->{3} & \uncover<9->{2} & \uncover<9->{false} \\ \hline
+        \end{traccia}\\[0.4em]
+        \uncover<10->{\texttt{k >= r}: \texttt{p = false} e \texttt{s = "ddyy" + "x"}. Risultato: \texttt{j=3}, \texttt{k=2}, \texttt{p=false}, \texttt{s="ddyyx"}.}}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+%%% ---------- Versioni originali con due cicli ----------
+\begin{frame}[fragile]{Esercizio 3}
+  \begin{columns}[T]
+    \begin{column}{0.52\textwidth}
+      \codice[basicstyle=\ttfamily\scriptsize,firstline=3,lastline=18,gobble=4,numbers=none]{codice/Parziale1.java}
+    \end{column}
+    \begin{column}{0.44\textwidth}
+      \footnotesize Il corpo del \texttt{for} \`e l'Esercizio 1, ripetuto per ogni carattere di \texttt{a}.\\[0.2em]
+      Determinare il valore finale di \texttt{i}, \texttt{j}, \texttt{k} e degli elementi di \texttt{b} nei casi:
+      \begin{enumerate}\footnotesize
+        \item \texttt{c = \{'a','w','g','y'\}}, \texttt{s = "wyygww"}, \texttt{v = 3}
+        \item \texttt{c = \{'h','z','k'\}}, \texttt{s = "kzhhh"}, \texttt{v = 2}
+      \end{enumerate}
+      \indizio{Una tabella per ogni elemento di \texttt{a}: \texttt{j} e \texttt{k} ripartono da 0.}
+      \soluzione{%
+        \small
+        1) \texttt{i=4}, \texttt{j=6}, \texttt{k=4}, \texttt{b = \{true,false,true,true\}}\\
+        2) \texttt{i=3}, \texttt{j=4}, \texttt{k=3}, \texttt{b = \{false,true,true\}}}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Esercizio 4}
+  \begin{columns}[T]
+    \begin{column}{0.52\textwidth}
+      \codice[basicstyle=\ttfamily\scriptsize,firstline=3,lastline=22,gobble=4,numbers=none]{codice/Parziale2.java}
+    \end{column}
+    \begin{column}{0.44\textwidth}
+      \small Il corpo del \texttt{for} \`e l'Esercizio 2, ripetuto per ogni stringa di \texttt{a}.\\[0.4em]
+      Determinare il valore finale di \texttt{i}, \texttt{j}, \texttt{k}, \texttt{p} ed \texttt{s} con\\
+      \texttt{b = \{"qqr","ddyy","","v","gggg"\}} e \texttt{r = 2}.
+      \indizio{\texttt{s} cresce solo quando \texttt{k >= r}; \texttt{p} torna \texttt{true} a ogni nuova stringa.}
+      \soluzione{%
+        \small
+        Le stringhe \texttt{"ddyy"} e \texttt{"gggg"} aggiungono s\'e stesse davanti a \texttt{s}.\\
+        \texttt{i=5}, \texttt{j=2}, \texttt{k=2}, \texttt{p=false}, \texttt{s="ggggddyyx"}}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\end{document}
